@@ -17,7 +17,6 @@ limitations under the License.
 package pdfcpu
 
 import (
-	_ "embed"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -189,7 +188,6 @@ var ConfigPath string = "default"
 
 var loadedDefaultConfig *Configuration
 
-//go:embed config.yml
 var configFileBytes []byte
 
 func ensureConfigFileAt(path string) error {
