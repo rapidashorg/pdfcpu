@@ -23,6 +23,7 @@ import (
 	"flag"
 	"fmt"
 	"go/format"
+	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -98,7 +99,7 @@ func writeCoreFontMetrics(w *bytes.Buffer) {
 	`
 	w.WriteString(s)
 	dir := "../Core14_AFMs"
-	files, err := os.ReadDir(dir)
+	files, err := ioutil.ReadDir(dir)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -199,8 +200,8 @@ func finish(w *bytes.Buffer, filename string) {
 	if err != nil {
 		log.Fatalf("format.Source: %v", err)
 	}
-	if err := os.WriteFile(filename, out, 0660); err != nil {
-		log.Fatalf("os.WriteFile: %v", err)
+	if err := ioutil.WriteFile(filename, out, 0660); err != nil {
+		log.Fatalf("ioutil.WriteFile: %v", err)
 	}
 }
 

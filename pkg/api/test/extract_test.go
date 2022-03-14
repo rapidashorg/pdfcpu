@@ -18,7 +18,7 @@ package test
 
 import (
 	"fmt"
-	"io"
+	"io/ioutil"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -187,7 +187,7 @@ func TestExtractContentLowLevel(t *testing.T) {
 	}
 
 	// Process page content.
-	bb, err := io.ReadAll(r)
+	bb, err := ioutil.ReadAll(r)
 	if err != nil {
 		t.Fatalf("%s readAll: %v\n", msg, err)
 	}
@@ -221,7 +221,7 @@ func TestExtractMetadataLowLevel(t *testing.T) {
 
 	// Process metadata.
 	for _, md := range mm {
-		bb, err := io.ReadAll(md)
+		bb, err := ioutil.ReadAll(md)
 		if err != nil {
 			t.Fatalf("%s metadata readAll: %v\n", msg, err)
 		}

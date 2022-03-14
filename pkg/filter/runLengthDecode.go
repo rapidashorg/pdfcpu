@@ -19,6 +19,7 @@ package filter
 import (
 	"bytes"
 	"io"
+	"io/ioutil"
 )
 
 type runLengthDecode struct {
@@ -112,7 +113,7 @@ func (f runLengthDecode) encode(w io.ByteWriter, src []byte) {
 // Encode implements encoding for a RunLengthDecode filter.
 func (f runLengthDecode) Encode(r io.Reader) (io.Reader, error) {
 
-	p, err := io.ReadAll(r)
+	p, err := ioutil.ReadAll(r)
 	if err != nil {
 		return nil, err
 	}
@@ -126,7 +127,7 @@ func (f runLengthDecode) Encode(r io.Reader) (io.Reader, error) {
 // Decode implements decoding for an RunLengthDecode filter.
 func (f runLengthDecode) Decode(r io.Reader) (io.Reader, error) {
 
-	p, err := io.ReadAll(r)
+	p, err := ioutil.ReadAll(r)
 	if err != nil {
 		return nil, err
 	}

@@ -21,6 +21,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io"
+	"io/ioutil"
 
 	"github.com/pdfcpu/pdfcpu/pkg/filter"
 	"github.com/pdfcpu/pdfcpu/pkg/log"
@@ -190,7 +191,7 @@ func (sd *StreamDict) Encode() error {
 	}
 
 	var err error
-	if sd.Raw, err = io.ReadAll(c); err != nil {
+	if sd.Raw, err = ioutil.ReadAll(c); err != nil {
 		return err
 	}
 	streamLength := int64(len(sd.Raw))
@@ -281,7 +282,7 @@ func (sd *StreamDict) Decode() error {
 	}
 
 	var err error
-	if sd.Content, err = io.ReadAll(c); err != nil {
+	if sd.Content, err = ioutil.ReadAll(c); err != nil {
 		return err
 	}
 

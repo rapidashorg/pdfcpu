@@ -18,6 +18,7 @@ package pdfcpu
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"time"
@@ -188,7 +189,43 @@ var ConfigPath string = "default"
 
 var loadedDefaultConfig *Configuration
 
-var configFileBytes []byte
+var configFileBytes []byte = []byte(`#########################
+# Default configuration #
+#########################
+
+reader15: true
+decodeAllStreams: false
+
+# validationMode: 
+# ValidationStrict,
+# ValidationRelaxed,
+# ValidationNone
+validationMode: ValidationRelaxed
+
+# eol for writing:
+# EolLF
+# EolCR
+# EolCRLF
+eol: EolLF
+
+writeObjectStream: true
+writeXRefStream: true
+encryptUsingAES: true
+
+# encryptKeyLength: max 256 
+encryptKeyLength: 256
+
+# permissions for encrypted files: 
+# -3901 = 0xF0C3 (PermissionsNone)
+#    -1 = 0xFFFF (PermissionsAll)
+permissions: -3901
+
+# displayUnit:
+# points
+# inches
+# cm
+# mm
+unit: points`)
 
 func ensureConfigFileAt(path string) error {
 	f, err := os.Open(path)
@@ -196,7 +233,7 @@ func ensureConfigFileAt(path string) error {
 		f.Close()
 		s := fmt.Sprintf("#############################\n# pdfcpu %s        #\n# Created: %s #\n", VersionStr, time.Now().Format("2006-01-02 15:04"))
 		bb := append([]byte(s), configFileBytes...)
-		if err := os.WriteFile(path, bb, os.ModePerm); err != nil {
+		if err := ioutil.WriteFile(path, bb, os.ModePerm); err != nil {
 			return err
 		}
 		f, err = os.Open(path)

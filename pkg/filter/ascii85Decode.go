@@ -20,6 +20,7 @@ import (
 	"bytes"
 	"encoding/ascii85"
 	"io"
+	"io/ioutil"
 
 	"github.com/pkg/errors"
 )
@@ -33,7 +34,7 @@ const eodASCII85 = "~>"
 // Encode implements encoding for an ASCII85Decode filter.
 func (f ascii85Decode) Encode(r io.Reader) (io.Reader, error) {
 
-	p, err := io.ReadAll(r)
+	p, err := ioutil.ReadAll(r)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +53,7 @@ func (f ascii85Decode) Encode(r io.Reader) (io.Reader, error) {
 // Decode implements decoding for an ASCII85Decode filter.
 func (f ascii85Decode) Decode(r io.Reader) (io.Reader, error) {
 
-	p, err := io.ReadAll(r)
+	p, err := ioutil.ReadAll(r)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +74,7 @@ func (f ascii85Decode) Decode(r io.Reader) (io.Reader, error) {
 
 	decoder := ascii85.NewDecoder(bytes.NewReader(p))
 
-	buf, err := io.ReadAll(decoder)
+	buf, err := ioutil.ReadAll(decoder)
 	if err != nil {
 		return nil, err
 	}

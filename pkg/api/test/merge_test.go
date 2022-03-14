@@ -19,6 +19,7 @@ package test
 import (
 	"bytes"
 	"io"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
@@ -86,7 +87,7 @@ func TestMergeToBuf(t *testing.T) {
 		t.Fatalf("%s: merge: %v\n", msg, err)
 	}
 
-	if err := os.WriteFile(outFile, buf.Bytes(), 0644); err != nil {
+	if err := ioutil.WriteFile(outFile, buf.Bytes(), 0644); err != nil {
 		t.Fatalf("%s: write: %v\n", msg, err)
 	}
 }

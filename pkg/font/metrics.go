@@ -19,6 +19,7 @@ package font
 import (
 	"encoding/gob"
 	"fmt"
+	"io/ioutil"
 	"math"
 	"os"
 	"path"
@@ -138,7 +139,7 @@ func isSupportedFontFile(filename string) bool {
 // LoadUserFonts loads any installed TTF or OTF font files.
 func LoadUserFonts() error {
 	//fmt.Printf("loading userFonts from %s\n", UserFontDir)
-	files, err := os.ReadDir(UserFontDir)
+	files, err := ioutil.ReadDir(UserFontDir)
 	if err != nil {
 		return err
 	}

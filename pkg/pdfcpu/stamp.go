@@ -21,6 +21,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"math"
 	"net/url"
 	"os"
@@ -1024,7 +1025,7 @@ func setImageWatermark(s string, wm *Watermark) error {
 		return err
 	}
 	defer f.Close()
-	bb, err := io.ReadAll(f)
+	bb, err := ioutil.ReadAll(f)
 	if err != nil {
 		return err
 	}
