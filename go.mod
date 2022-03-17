@@ -1,4 +1,4 @@
-module github.com/pdfcpu/pdfcpu
+module github.com/rapidashorg/pdfcpu
 
 go 1.14
 
